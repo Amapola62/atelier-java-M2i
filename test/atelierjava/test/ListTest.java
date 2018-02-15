@@ -15,7 +15,46 @@ import static org.junit.Assert.*;
  */
 public class ListTest {
 
+//    @Test
+    public void removeOK() {
+        ArrayList<String> prenoms = new ArrayList<>();
+
+        prenoms.add("Laura");
+        prenoms.add("Lucas");
+        prenoms.add("Christophe");
+
+        prenoms.remove("Christophe");
+        
+        prenoms.add("Laura");
+        prenoms.remove("Laura");
+
+        for (String prenom : prenoms) {
+            System.out.println(prenom);                
+        }
+    }
     @Test
+    public void removeAllOk() {
+        ArrayList<String> couleurs = new ArrayList<>();
+        
+        couleurs.add("Rouge");
+        couleurs.add("Vert");
+        couleurs.add("Jaune");
+        couleurs.add("Rouge");
+        
+        ArrayList<String> couleurs2 = new ArrayList<>();
+        
+        couleurs2.add("Rouge");
+        couleurs2.add("Jaune");
+        
+        couleurs.removeAll(couleurs2);
+        
+        for (String couleur : couleurs) {
+            System.out.println(couleur);
+        }
+        
+    }
+
+//    @Test
     public void addAvecIndiceOK() {
         ArrayList<Integer> nombresPremiers = new ArrayList<>();
 
@@ -29,7 +68,7 @@ public class ListTest {
         }
     }
 
-    @Test
+//    @Test
     public void multipleDeDeux() {
         //Créer la liste
         ArrayList<Integer> multiplesDeDeux = new ArrayList<>();
@@ -46,7 +85,7 @@ public class ListTest {
         }
     }
 
-    @Test
+//    @Test
     public void nombresPremiers() {
         //Créer la liste
         ArrayList<Integer> nombresPremiers = new ArrayList<>();
@@ -73,7 +112,7 @@ public class ListTest {
         }
     }
 
-    @Test
+//    @Test
     public void addOK() {
 
         ArrayList<String> capitales = new ArrayList<>();
@@ -89,13 +128,13 @@ public class ListTest {
 
     public int factorielle(int n) {
         int res = n;
-        for (int i = n-1; i > 1; i--) {
+        for (int i = n - 1; i > 1; i--) {
             res = res * i;
         }
         return res;
     }
 
-    @Test
+//    @Test
     public void factorielleOK() {
         int res = factorielle(4);
         System.out.println(res);
