@@ -6,7 +6,7 @@
 package atelierjava;
 
 /**
- *
+ * Représente la super classe des animaux
  * @author Formation
  */
 public class Animal {
