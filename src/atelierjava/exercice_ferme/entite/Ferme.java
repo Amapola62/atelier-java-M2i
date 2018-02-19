@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package atelierjava.exercice_ferme;
+package atelierjava.exercice_ferme.entite;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Ferme {
     private double budget;
     private String nom;
+    private String motdePasse;
     private ArrayList<Terrain> terrains = new ArrayList<>();
     private ArrayList<Ressource> ressourcesPossedes = new ArrayList<>();
 
@@ -47,7 +48,15 @@ public class Ferme {
 
     public void setRessourcesPossedes(ArrayList<Ressource> ressourcesPossedes) {
         this.ressourcesPossedes = ressourcesPossedes;
+        
     }
-    
+
+    public String getMotdePasse() {
+        return motdePasse;
+    }
+
+    public void setMotdePasse(String motdePasse) {
+        this.motdePasse = motdePasse;
+    }
     
 }
