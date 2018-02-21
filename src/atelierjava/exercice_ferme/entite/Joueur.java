@@ -11,9 +11,9 @@ import java.util.ArrayList;
  *
  * @author Formation
  */
-public class Ferme {
+public class Joueur {
     private double budget;
-    private String nom;
+    private String pseudo;
     private String motdePasse;
     private ArrayList<Terrain> terrains = new ArrayList<>();
     private ArrayList<Ressource> ressourcesPossedes = new ArrayList<>();
@@ -26,12 +26,12 @@ public class Ferme {
         this.budget = budget;
     }
 
-    public String getNom() {
-        return nom;
+    public String getPseudo() {
+        return pseudo;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 
     public ArrayList<Terrain> getTerrains() {

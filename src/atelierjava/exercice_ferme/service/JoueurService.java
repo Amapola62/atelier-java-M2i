@@ -5,8 +5,8 @@
  */
 package atelierjava.exercice_ferme.service;
 
-import atelierjava.exercice_ferme.dao.FermeDAO;
-import atelierjava.exercice_ferme.entite.Ferme;
+import atelierjava.exercice_ferme.dao.JoueurDAO;
+import atelierjava.exercice_ferme.entite.Joueur;
 
 /**
  *
@@ -20,7 +20,7 @@ import atelierjava.exercice_ferme.entite.Ferme;
  * @param pseudo
  * @param mdp
  */
-public class FermeService {
+public class JoueurService {
     
     public void inscription(String pseudo, String mdp) {
         //Erreur si pseudo a moins de 3 caractères ou plus de 10
@@ -41,14 +41,20 @@ public class FermeService {
             throw new RuntimeException("Le mdp doit contenir un chiffre");
         }
         //Vérifier que le pseudo est encore dispo
-        FermeDAO dao = new FermeDAO();
+        JoueurDAO dao = new JoueurDAO();
         if (dao.existe(pseudo)) {
             throw new RuntimeException("Ce pseudo existe déjà");
         }
         //Ajouter la ferme dans la base de donnée
-        Ferme ferme = new Ferme();
-        ferme.setNom(pseudo);
+        Joueur ferme = new Joueur();
+        ferme.setPseudo(pseudo);
         ferme.setMotdePasse(mdp);
         dao.ajouter(ferme);
     }
+    public void connexion(String pseudo, String mdp) {
+        JoueurDAO dao = new JoueurDAO();
+        if (!dao.existe(pseudo, mdp)== true)
+            throw new RuntimeException("Echec de connexion");
+    }
 }
+
