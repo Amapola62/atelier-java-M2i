@@ -5,18 +5,26 @@
  */
 package atelierjava.exercice_ferme.entite;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Formation
  */
-public class Joueur {
+@Entity
+public class Joueur implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private double budget;
     private String pseudo;
     private String motdePasse;
-    private ArrayList<Terrain> terrains = new ArrayList<>();
-    private ArrayList<Ressource> ressourcesPossedes = new ArrayList<>();
 
     public double getBudget() {
         return budget;
@@ -34,29 +42,45 @@ public class Joueur {
         this.pseudo = pseudo;
     }
 
-    public ArrayList<Terrain> getTerrains() {
-        return terrains;
-    }
-
-    public void setTerrains(ArrayList<Terrain> terrains) {
-        this.terrains = terrains;
-    }
-
-    public ArrayList<Ressource> getRessourcesPossedes() {
-        return ressourcesPossedes;
-    }
-
-    public void setRessourcesPossedes(ArrayList<Ressource> ressourcesPossedes) {
-        this.ressourcesPossedes = ressourcesPossedes;
-        
-    }
-
     public String getMotdePasse() {
         return motdePasse;
     }
 
     public void setMotdePasse(String motdePasse) {
         this.motdePasse = motdePasse;
+    }
+
+    public Long getId() {
+        return id;
+    }
+  
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Joueur)) {
+            return false;
+        }
+        Joueur other = (Joueur) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "atelierjava.exercice_ferme.entity.Joueur[ id=" + id + " ]";
     }
     
 }
