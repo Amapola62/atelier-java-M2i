@@ -6,7 +6,9 @@
 package atelierjava.exercice_ferme.service;
 
 import atelierjava.exercice_ferme.dao.JoueurDAO;
+import atelierjava.exercice_ferme.dao.RessourceDAO;
 import atelierjava.exercice_ferme.entite.Joueur;
+import atelierjava.exercice_ferme.entite.Ressource;
 
 /**
  *
@@ -21,6 +23,50 @@ import atelierjava.exercice_ferme.entite.Joueur;
  * @param mdp
  */
 public class JoueurService {
+    
+    public void ajouterRessource(long joueurId, 
+            Ressource.TypeRessource typeRessource,
+            long quantite) {
+        JoueurDAO dao = new JoueurDAO();
+        
+        Joueur joueur = dao.rechercher(joueurId);
+       
+            
+            //1. Ajouter 5 carottes
+            for( int i = 1; i<=quantite; i++){
+                
+                Ressource ressource = new Ressource();
+                ressource.setDesignation(typeRessource);
+                ressource.setJoueur(joueur);
+                joueur.getRessourcesPossedees().add(ressource);
+                RessourceDAO ressourceDAO = new RessourceDAO();
+                ressourceDAO.ajouter(ressource);
+            }
+    }
+        
+        
+   
+    
+    public void rejoindrePartie(long idJoueur) {
+        //1. Génére les ressources SI aucune ressource pour ce joueur
+        JoueurDAO dao = new JoueurDAO();
+        
+        Joueur joueur = dao.rechercher(idJoueur);
+        if( joueur.getRessourcesPossedees().isEmpty() ) {
+            
+            //1. Ajouter 5 carottes
+           this.ajouterRessource(idJoueur, Ressource.TypeRessource.CARROTE, 5);
+                
+            //2. Ajouter 5 blés
+            this.ajouterRessource(idJoueur, Ressource.TypeRessource.BLE, 5);
+            
+            //3. Ajouter 5 chèvres
+            this.ajouterRessource(idJoueur, Ressource.TypeRessource.CHEVRE, 5);
+            
+            //4. Ajouter 2 fermiers
+            this.ajouterRessource(idJoueur, Ressource.TypeRessource.FERMIER, 2);
+        }
+    }
     
     public void inscription(String pseudo, String mdp) {
         //Erreur si pseudo a moins de 3 caractères ou plus de 10
@@ -51,10 +97,10 @@ public class JoueurService {
         ferme.setMotdePasse(mdp);
         dao.ajouter(ferme);
     }
-    public void connexion(String pseudo, String mdp) {
+    public Joueur connexion(String pseudo, String mdp) {
         JoueurDAO dao = new JoueurDAO();
-        if (!dao.existe(pseudo, mdp)== true)
-            throw new RuntimeException("Echec de connexion");
+       Joueur j = dao.rechercher(pseudo, mdp);
+       return j;
     }
 }
 

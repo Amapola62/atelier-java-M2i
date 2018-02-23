@@ -5,6 +5,7 @@ package atelierjava.exercice_ferme.test;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import atelierjava.exercice_ferme.entite.Joueur;
 import atelierjava.exercice_ferme.service.JoueurService;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -38,7 +39,13 @@ public class JoueurServicetTest {
         JoueurService service = new JoueurService();
         service.connexion("Robert", "Ab24utp");
     }
-    
+    @Test
+    public void rejoindrePartieOK() {
+        JoueurService service = new JoueurService();
+        service.inscription("Amapola64", "EaFnb72");
+        Joueur joueur = service.connexion("Amapola64", "EaFnb72");
+        service.rejoindrePartie( joueur.getId());
+    }
    
     
 }
