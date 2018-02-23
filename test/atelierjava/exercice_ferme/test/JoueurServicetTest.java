@@ -15,13 +15,13 @@ import static org.junit.Assert.*;
  */
 public class JoueurServicetTest {
 
-    //@Test
+    @Test
     public void inscriptionOK() {
         JoueurService service = new JoueurService();
-        service.inscription("Amapola62", "EaFnb72");
+        service.inscription("Amapola63", "EaFnb72");
     }
 
-    //@Test(expected = RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void inscriptionKO() {
         JoueurService service = new JoueurService();
         service.inscription("Amapola62", "BerliozPlume");
@@ -38,4 +38,7 @@ public class JoueurServicetTest {
         JoueurService service = new JoueurService();
         service.connexion("Robert", "Ab24utp");
     }
+    
+   
+    
 }

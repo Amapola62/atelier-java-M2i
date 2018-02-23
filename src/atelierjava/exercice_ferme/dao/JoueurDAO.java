@@ -58,7 +58,17 @@ public class JoueurDAO {
         return true;
     }
 
-    public boolean existe(String login) {
-        return true;
+    public boolean existe(String pseudo) {
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        
+        Query query = em.createQuery("SELECT COUNT(j) FROM Joueur j WHERE j.pseudo=:pseudoExistant");
+        query.setParameter("pseudoExistant", pseudo);
+        
+        Long nbJoueurs = (Long) query.getSingleResult();
+        
+        if ( nbJoueurs>0 )
+            return true;
+        
+        return false;
     }
 }

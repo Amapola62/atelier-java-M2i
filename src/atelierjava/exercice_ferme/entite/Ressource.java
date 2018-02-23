@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,10 +21,10 @@ import javax.persistence.Id;
 public class Ressource implements Serializable {
 
     public enum TypeRessource {
-        ANIMAL_MOUTON,
-        ANIMAL_VACHE,
+        ANIMAL_CHEVRE,
         CULTURE_BLE,
-        CULTURE_MAIS
+        CULTURE_CARROTE,
+        ALIMENT_FROMAGE
     }
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +33,21 @@ public class Ressource implements Serializable {
     private Long id;
     private TypeRessource designation;
     private String nom;
+    
+    @ManyToOne
+    @JoinColumn(name = "joueur_id")
+    private Joueur joueur;
 
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
+    }
+    
+    
+    
     public TypeRessource getDesignation() {
         return designation;
     }
