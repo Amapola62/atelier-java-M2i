@@ -37,12 +37,12 @@ public class InscriptionView extends GridPane {
             try{
                   JoueurService js = new JoueurService();
             js.inscription(tfPseudo.getText(), pfMdp.getText());
-            
+            js.connexion(tfPseudo.getText(), pfMdp.getText());
             //Remplace le centre du parent par un texte vide 
-           borderPaneDuParent.setCenter(new Label("Inscription réussie"));
+           borderPaneDuParent.setCenter(new Label("Inscription et connexion réussies"));
             
             }catch(Exception exception) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Une erreur s'est produite");
                 alert.setContentText(exception.getMessage());

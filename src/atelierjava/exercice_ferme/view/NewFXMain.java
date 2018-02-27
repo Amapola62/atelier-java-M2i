@@ -41,7 +41,7 @@ public class NewFXMain extends Application {
         });
         
         bConnexion.setOnAction( e -> {
-            root.setCenter(new ConnexionView());
+            root.setCenter(new ConnexionView(root));
         });
         
         root.setTop(barreOutils);
