@@ -9,6 +9,8 @@ import atelierjava.exercice_ferme.dao.JoueurDAO;
 import atelierjava.exercice_ferme.dao.RessourceDAO;
 import atelierjava.exercice_ferme.entite.Joueur;
 import atelierjava.exercice_ferme.entite.Ressource;
+import atelierjava.exercice_ferme.exception.PseudoExisteException;
+import atelierjava.exercice_ferme.exception.ValidationException;
 
 /**
  *
@@ -68,28 +70,29 @@ public class JoueurService {
         }
     }
     
-    public void inscription(String pseudo, String mdp) {
+    public void inscription(String pseudo, String mdp) throws ValidationException, PseudoExisteException{
         //Erreur si pseudo a moins de 3 caractères ou plus de 10
         if (!pseudo.matches(".{3,10}")) {
-            throw new RuntimeException("Le pseudo doit être compris entre 3 et 8 caractères");
+            throw new ValidationException("Le pseudo doit être compris entre 3 et 8 caractères");
+            //);
         }
         //Erreur si mdp a moins de 5 caractères ou plus de 10
         if (!mdp.matches(".{5,10}")) {
-            throw new RuntimeException("Le mot de passe doit être compris entre 5 et 10 caractères");
+            throw new ValidationException("Le mot de passe doit être compris entre 5 et 10 caractères");
         }
         //Erreur si le mdp ne contient pas de majuscule
         if (!mdp.matches(".*[A-Z].*")) {
-            throw new RuntimeException("Le mdp doit contenir une majuscule");
+            throw new ValidationException("Le mdp doit contenir une majuscule");
         }
 
         //Erreur si le mdp ne contient pas de chiffre
         if (!mdp.matches(".*[0-9].*")) {
-            throw new RuntimeException("Le mdp doit contenir un chiffre");
+            throw new ValidationException("Le mdp doit contenir un chiffre");
         }
         //Vérifier que le pseudo est encore dispo
         JoueurDAO dao = new JoueurDAO();
         if (dao.existe(pseudo)) {
-            throw new RuntimeException("Ce pseudo existe déjà");
+            throw new PseudoExisteException("Ce pseudo existe déjà");
         }
         //Ajouter la ferme dans la base de donnée
         Joueur ferme = new Joueur();
