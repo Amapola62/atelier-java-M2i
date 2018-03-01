@@ -38,13 +38,15 @@ public class ConnexionView extends GridPane {
                 JoueurService js = new JoueurService();
                 js.connexion(tfPseudo.getText(), pfMdp.getText());
 
-                borderPaneDuParent.setCenter(new Label("Connexion réussie"));
+                borderPaneDuParent.setCenter(new EcranJeuView());
 
             }catch(Exception exception) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Une erreur s'est produite");
-                alert.setContentText("Echec de connexion");
+                alert.setContentText(exception.getMessage());
+                
+                exception.printStackTrace();
                 
                 alert.showAndWait();
             }

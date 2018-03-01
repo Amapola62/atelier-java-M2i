@@ -6,6 +6,8 @@ package atelierjava.exercice_ferme.test;
  * and open the template in the editor.
  */
 import atelierjava.exercice_ferme.entite.Joueur;
+import atelierjava.exercice_ferme.exception.PseudoExisteException;
+import atelierjava.exercice_ferme.exception.ValidationException;
 import atelierjava.exercice_ferme.service.JoueurService;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,19 +19,19 @@ import static org.junit.Assert.*;
 public class JoueurServicetTest {
 
     @Test
-    public void inscriptionOK() {
+    public void inscriptionOK() throws ValidationException, PseudoExisteException {
         JoueurService service = new JoueurService();
         service.inscription("Amapola63", "EaFnb72");
     }
 
     @Test(expected = RuntimeException.class)
-    public void inscriptionKO() {
+    public void inscriptionKO() throws PseudoExisteException, ValidationException {
         JoueurService service = new JoueurService();
         service.inscription("Amapola62", "BerliozPlume");
     }
 
     @Test
-    public void connexionOK() {
+    public void connexionOK() throws ValidationException, PseudoExisteException {
        JoueurService service = new JoueurService();
        service.inscription("Amapola62", "EaFnb72");
        service.connexion("Amapola62", "EaFnb72");
@@ -40,7 +42,7 @@ public class JoueurServicetTest {
         service.connexion("Robert", "Ab24utp");
     }
     @Test
-    public void rejoindrePartieOK() {
+    public void rejoindrePartieOK() throws ValidationException, PseudoExisteException {
         JoueurService service = new JoueurService();
         service.inscription("Amapola64", "EaFnb72");
         Joueur joueur = service.connexion("Amapola64", "EaFnb72");
